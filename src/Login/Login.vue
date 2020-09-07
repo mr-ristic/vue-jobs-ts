@@ -41,8 +41,51 @@
   </div>
 </template>
 
-<script>
-export default {};
+<script lang="ts">
+import Vue from 'vue';
+import { mapState, mapActions } from 'vuex';
+import { ErrorProps } from './interface';
+import { ActionTypes } from './const';
+
+export default Vue.extend({
+  name: 'Login',
+  data() {
+    return {
+      email: '',
+      password: ''
+    };
+  },
+  computed: mapState({
+    // known bug with vuex & ts
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    errors: (state: any): ErrorProps => {
+      return state.login.errors;
+    }
+  }),
+  watch: {
+    email(value: string): void {
+      this.validateEmail(value);
+    }
+  },
+  methods: {
+    onSubmit(): void {
+      // console.log(this.email);
+    },
+    ...mapActions([ActionTypes.SET_ERROR]),
+    validateEmail(email: string): void {
+      const emailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i;
+      if (!emailRegex.test(email)) {
+        // TODO call error action
+        // console.log(this);
+        this[ActionTypes.SET_ERROR]('email');
+      }
+      if (emailRegex.test(email)) {
+        // console.log(this.errors);
+        // TODO call clear error action
+      }
+    }
+  }
+});
 </script>
 
 <style></style>
