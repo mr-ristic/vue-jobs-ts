@@ -9,4 +9,9 @@ export interface LoginProps {
   submitting: boolean;
 }
 
+export interface FieldsProps {
+  email: string;
+  password: string;
+}
+
 export interface StateProps {}

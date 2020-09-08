@@ -1,7 +1,6 @@
 import { MutationTree } from 'vuex';
 import { LoginProps } from './interface';
 import { MutationTypes, EMAIL_ERROR, PASSWORD_ERROR } from './const';
-import { initialLoginState } from './module';
 
 export const mutations: MutationTree<LoginProps> = {
   [MutationTypes.SET_EMAIL_ERROR](state) {
@@ -18,7 +17,11 @@ export const mutations: MutationTree<LoginProps> = {
     if (payload === 'password') state.errors.password = false;
     if (payload === 'other') state.errors.message = false;
     if (!payload) {
-      state.errors = initialLoginState.errors;
+      state.errors = {
+        message: false,
+        email: false,
+        password: false
+      };
     }
   },
   [MutationTypes.SET_SUBMITTING](state, payload: boolean) {

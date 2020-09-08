@@ -3,6 +3,9 @@
     <div class="mt-4 col-4">
       <form @submit.prevent="onSubmit">
         <h1 class="h3 mb-3 font-weight-normal">Login</h1>
+        <div v-if="errors.message" class="row alert alert-danger" role="alert">
+          {{ errors.message }}
+        </div>
         <div class="form-group row">
           <label for="email" class="sr-only">Email address</label>
           <input
@@ -98,7 +101,10 @@ export default Vue.extend({
   },
   methods: {
     onSubmit(): void {
-      this[ActionTypes.SUBMIT_FORM]();
+      this[ActionTypes.SUBMIT_FORM]({
+        email: this.email,
+        password: this.password
+      });
     },
     ...mapActions([
       ActionTypes.SET_ERROR,
@@ -106,7 +112,7 @@ export default Vue.extend({
       ActionTypes.SUBMIT_FORM
     ]),
     validateEmail(email: string): void {
-      const emailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i;
+      const emailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
       if (!emailRegex.test(email)) {
         this[ActionTypes.SET_ERROR]('email');
       }

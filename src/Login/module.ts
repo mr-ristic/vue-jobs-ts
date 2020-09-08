@@ -14,7 +14,7 @@ export const initialLoginState = {
 };
 
 const LoginModule: Module<LoginProps, StateProps> = {
-  state: () => initialLoginState,
+  state: () => ({ ...initialLoginState }),
   actions,
   mutations,
   getters
