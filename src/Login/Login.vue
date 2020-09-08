@@ -35,7 +35,11 @@
             {{ errors.password }}
           </small>
         </div>
-        <button class="btn btn-lg btn-primary btn-block mt-3" type="submit">
+        <button
+          :disabled="!isSubmitReady"
+          class="btn btn-lg btn-primary btn-block mt-3"
+          type="submit"
+        >
           Sign in
         </button>
       </form>
@@ -45,9 +49,9 @@
 
 <script lang="ts">
 import Vue from 'vue';
-import { mapState, mapActions } from 'vuex';
+import { mapState, mapActions, mapGetters } from 'vuex';
 import { ErrorProps } from './interface';
-import { ActionTypes } from './const';
+import { ActionTypes, GetterTypes } from './const';
 
 export default Vue.extend({
   name: 'Login',
@@ -57,13 +61,29 @@ export default Vue.extend({
       password: ''
     };
   },
-  computed: mapState({
-    // known bug with vuex & ts
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    errors: (state: any): ErrorProps => {
-      return state.login.errors;
+  computed: {
+    ...mapGetters({
+      checkErrors: GetterTypes.CHECK_ERRORS
+    }),
+    ...mapState({
+      // known bug with vuex & ts
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      errors: (state: any): ErrorProps => {
+        return state.login.errors;
+      }
+    }),
+    isSubmitReady(): boolean {
+      if (
+        !this.checkErrors &&
+        this.email.length > 0 &&
+        this.password.length > 1
+      ) {
+        return true;
+      }
+
+      return false;
     }
-  }),
+  },
   watch: {
     email(value: string): void {
       this.validateEmail(value);

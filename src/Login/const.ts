@@ -11,3 +11,7 @@ export enum MutationTypes {
   SET_OTHER_ERROR = 'SET_OTHER_ERROR',
   RESET_ERROR = 'RESET_ERROR'
 }
+
+export enum GetterTypes {
+  CHECK_ERRORS = 'CHECK_ERRORS'
+}

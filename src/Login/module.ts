@@ -2,6 +2,7 @@ import { Module, ActionTree } from 'vuex';
 import { LoginProps, StateProps } from './interface';
 import { actions } from './actions';
 import { mutations } from './mutations';
+import { getters } from './getters';
 
 export const initialLoginState = {
   errors: {
@@ -14,7 +15,8 @@ export const initialLoginState = {
 const LoginModule: Module<LoginProps, StateProps> = {
   state: () => initialLoginState,
   actions,
-  mutations
+  mutations,
+  getters
 };
 
 export default LoginModule;
