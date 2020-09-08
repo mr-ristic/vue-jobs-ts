@@ -2,19 +2,24 @@ import { shallowMount, mount, createLocalVue } from '@vue/test-utils';
 import Vuex from 'vuex';
 import Login from '.';
 import { EMAIL_ERROR, ActionTypes } from './const';
-import { actions as realActions } from './actions';
 
 const localVue = createLocalVue();
 localVue.use(Vuex);
+const computed = {
+  errors: () => ({
+    email: false,
+    password: false
+  })
+};
 
 describe('Login.vue tests', () => {
   it('should render Login component', () => {
-    const wrapper = shallowMount(Login);
+    const wrapper = shallowMount(Login, { computed });
     expect(wrapper).toBeTruthy();
   });
 
   it('should render Login form inputs', () => {
-    const wrapper = mount(Login);
+    const wrapper = mount(Login, { computed });
 
     const emailInput = wrapper.get('#email');
     const passwordInput = wrapper.get('#password');
@@ -26,20 +31,25 @@ describe('Login.vue tests', () => {
     wrapper.destroy();
   });
 
-  it('should render error message for email', async () => {
+  it('should call email validate action', async () => {
     const actions = {
       [ActionTypes.SET_ERROR]: jest.fn()
     };
+
     const store = new Vuex.Store({
       actions
     });
-    const wrapper = mount(Login, { store, localVue });
+
+    const wrapper = mount(Login, {
+      store,
+      computed,
+      localVue
+    });
 
     const emailInput = wrapper.get('#email');
     await emailInput.setValue('not an valid email');
 
     expect(actions[ActionTypes.SET_ERROR]).toHaveBeenCalled();
-    // expect(wrapper.find('#email-error').text()).toEqual(EMAIL_ERROR);
 
     wrapper.destroy();
   });

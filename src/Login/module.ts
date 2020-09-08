@@ -1,6 +1,7 @@
 import { Module, ActionTree } from 'vuex';
 import { LoginProps, StateProps } from './interface';
 import { actions } from './actions';
+import { mutations } from './mutations';
 
 const LoginModule: Module<LoginProps, StateProps> = {
   state: () => ({
@@ -10,7 +11,8 @@ const LoginModule: Module<LoginProps, StateProps> = {
       message: false
     }
   }),
-  actions
+  actions,
+  mutations
 };
 
 export default LoginModule;

@@ -14,7 +14,7 @@
             autocomplete="on"
             v-model="email"
           />
-          <small id="email-error" class="text-danger">
+          <small v-if="errors.email" id="email-error" class="text-danger">
             Error placeholder
           </small>
         </div>
