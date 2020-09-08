@@ -6,6 +6,7 @@ export interface ErrorProps {
 
 export interface LoginProps {
   errors: ErrorProps;
+  submitting: boolean;
 }
 
 export interface StateProps {}

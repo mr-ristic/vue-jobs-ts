@@ -13,5 +13,8 @@ export const actions: ActionTree<LoginProps, StateProps> = {
   },
   [ActionTypes.RESET_ERROR]({ commit }, payload: string | boolean) {
     commit(MutationTypes.RESET_ERROR, payload);
+  },
+  [ActionTypes.SUBMIT_FORM]({ commit, state }) {
+    commit(MutationTypes.SET_SUBMITTING, true);
   }
 };

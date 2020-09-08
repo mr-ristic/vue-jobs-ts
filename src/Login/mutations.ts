@@ -13,12 +13,15 @@ export const mutations: MutationTree<LoginProps> = {
   [MutationTypes.SET_OTHER_ERROR](state, payload) {
     state.errors.message = payload;
   },
-  [MutationTypes.RESET_ERROR](state, payload) {
+  [MutationTypes.RESET_ERROR](state, payload: string) {
     if (payload === 'email') state.errors.email = false;
     if (payload === 'password') state.errors.password = false;
     if (payload === 'other') state.errors.message = false;
     if (!payload) {
       state.errors = initialLoginState.errors;
     }
+  },
+  [MutationTypes.SET_SUBMITTING](state, payload: boolean) {
+    state.submitting = payload;
   }
 };

@@ -9,7 +9,8 @@ export const initialLoginState = {
     email: false,
     password: false,
     message: false
-  }
+  },
+  submitting: false
 };
 
 const LoginModule: Module<LoginProps, StateProps> = {

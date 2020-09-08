@@ -3,13 +3,7 @@ import { MutationTypes, EMAIL_ERROR, PASSWORD_ERROR } from './const';
 import { initialLoginState } from './module';
 
 describe('Login mutations test', () => {
-  const state = {
-    errors: {
-      email: false,
-      password: false,
-      message: false
-    }
-  };
+  const state = initialLoginState;
   it('should set email error', () => {
     mutations[MutationTypes.SET_EMAIL_ERROR](state);
     expect(state.errors.email).toEqual(EMAIL_ERROR);
@@ -37,5 +31,9 @@ describe('Login mutations test', () => {
   it('should reset all the errors', () => {
     mutations[MutationTypes.RESET_ERROR](state, false);
     expect(state.errors).toEqual(initialLoginState.errors);
+  });
+  it('should set submitting to true', () => {
+    mutations[MutationTypes.SET_SUBMITTING](state, true);
+    expect(state.submitting).toBe(true);
   });
 });

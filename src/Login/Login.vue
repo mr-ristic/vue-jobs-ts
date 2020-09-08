@@ -38,6 +38,7 @@
         <button
           :disabled="!isSubmitReady"
           class="btn btn-lg btn-primary btn-block mt-3"
+          id="submit"
           type="submit"
         >
           Sign in
@@ -70,13 +71,16 @@ export default Vue.extend({
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       errors: (state: any): ErrorProps => {
         return state.login.errors;
-      }
+      },
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      submitting: (state: any): boolean => state.login.submitting
     }),
     isSubmitReady(): boolean {
       if (
         !this.checkErrors &&
         this.email.length > 0 &&
-        this.password.length > 1
+        this.password.length > 1 &&
+        !this.submitting
       ) {
         return true;
       }
@@ -94,9 +98,13 @@ export default Vue.extend({
   },
   methods: {
     onSubmit(): void {
-      // console.log(this.email);
+      this[ActionTypes.SUBMIT_FORM]();
     },
-    ...mapActions([ActionTypes.SET_ERROR, ActionTypes.RESET_ERROR]),
+    ...mapActions([
+      ActionTypes.SET_ERROR,
+      ActionTypes.RESET_ERROR,
+      ActionTypes.SUBMIT_FORM
+    ]),
     validateEmail(email: string): void {
       const emailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i;
       if (!emailRegex.test(email)) {
