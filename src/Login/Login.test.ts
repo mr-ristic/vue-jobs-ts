@@ -76,4 +76,29 @@ describe('Login.vue tests', () => {
 
     wrapper.destroy();
   });
+
+  it('should call Reset error action on valid inputs', async () => {
+    const actions = {
+      [ActionTypes.RESET_ERROR]: jest.fn()
+    };
+
+    const store = new Vuex.Store({
+      actions
+    });
+
+    const wrapper = mount(Login, {
+      store,
+      computed,
+      localVue
+    });
+
+    const emailInput = wrapper.get('#email');
+    await emailInput.setValue('valid@email.com');
+    const passwordInput = wrapper.get('#password');
+    await passwordInput.setValue('123456');
+
+    expect(actions[ActionTypes.RESET_ERROR]).toHaveBeenCalledTimes(2);
+
+    wrapper.destroy();
+  });
 });

@@ -1,7 +1,8 @@
 export const EMAIL_ERROR = 'Invalid Email address';
 export const PASSWORD_ERROR = 'Password must be 6 charachter or more';
 export enum ActionTypes {
-  SET_ERROR = 'SET_ERROR'
+  SET_ERROR = 'SET_ERROR',
+  RESET_ERROR = 'RESET_ERROR'
 }
 
 export enum MutationTypes {

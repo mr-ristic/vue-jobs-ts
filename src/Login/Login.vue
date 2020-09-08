@@ -76,15 +76,14 @@ export default Vue.extend({
     onSubmit(): void {
       // console.log(this.email);
     },
-    ...mapActions([ActionTypes.SET_ERROR]),
+    ...mapActions([ActionTypes.SET_ERROR, ActionTypes.RESET_ERROR]),
     validateEmail(email: string): void {
       const emailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i;
       if (!emailRegex.test(email)) {
         this[ActionTypes.SET_ERROR]('email');
       }
       if (emailRegex.test(email)) {
-        // console.log(this.errors);
-        // TODO call clear error action
+        this[ActionTypes.RESET_ERROR]('email');
       }
     },
     validatePassword(password: string) {
@@ -92,7 +91,7 @@ export default Vue.extend({
         this[ActionTypes.SET_ERROR]('password');
       }
       if (password.length > 5) {
-        // TODO clear error
+        this[ActionTypes.RESET_ERROR]('password');
       }
     }
   }

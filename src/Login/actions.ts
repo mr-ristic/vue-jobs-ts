@@ -10,5 +10,8 @@ export const actions: ActionTree<LoginProps, StateProps> = {
     if (payload === 'password') {
       commit(MutationTypes.SET_PASSWORD_ERROR);
     }
+  },
+  [ActionTypes.RESET_ERROR]({ commit }, payload: string | boolean) {
+    commit(MutationTypes.RESET_ERROR, payload);
   }
 };
