@@ -1,8 +1,12 @@
 export const EMAIL_ERROR = 'Invalid Email address';
+export const PASSWORD_ERROR = 'Password field is required';
 export enum ActionTypes {
   SET_ERROR = 'SET_ERROR'
 }
 
 export enum MutationTypes {
-  SET_EMAIL_ERROR = 'SET_EMAIL_ERROR'
+  SET_EMAIL_ERROR = 'SET_EMAIL_ERROR',
+  SET_PASSWORD_ERROR = 'SET_PASSWORD_ERROR',
+  SET_OTHER_ERROR = 'SET_OTHER_ERROR',
+  RESET_ERROR = 'RESET_ERROR'
 }

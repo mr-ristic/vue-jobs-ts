@@ -13,9 +13,10 @@
             placeholder="Email address"
             autocomplete="on"
             v-model="email"
+            :class="errors.email && 'is-invalid'"
           />
           <small v-if="errors.email" id="email-error" class="text-danger">
-            Error placeholder
+            {{ errors.email }}
           </small>
         </div>
         <div class="form-group row">
