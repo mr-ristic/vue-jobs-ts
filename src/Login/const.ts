@@ -1,5 +1,5 @@
 export const EMAIL_ERROR = 'Invalid Email address';
-export const PASSWORD_ERROR = 'Password field is required';
+export const PASSWORD_ERROR = 'Password must be 6 charachter or more';
 export enum ActionTypes {
   SET_ERROR = 'SET_ERROR'
 }

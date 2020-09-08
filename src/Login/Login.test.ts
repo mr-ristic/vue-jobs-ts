@@ -31,7 +31,7 @@ describe('Login.vue tests', () => {
     wrapper.destroy();
   });
 
-  it('should call email validate action', async () => {
+  it('should call SET_ERROR action on invalid email input', async () => {
     const actions = {
       [ActionTypes.SET_ERROR]: jest.fn()
     };
@@ -48,6 +48,29 @@ describe('Login.vue tests', () => {
 
     const emailInput = wrapper.get('#email');
     await emailInput.setValue('not an valid email');
+
+    expect(actions[ActionTypes.SET_ERROR]).toHaveBeenCalled();
+
+    wrapper.destroy();
+  });
+
+  it('should call SET_ERROR action on invalid password input', async () => {
+    const actions = {
+      [ActionTypes.SET_ERROR]: jest.fn()
+    };
+
+    const store = new Vuex.Store({
+      actions
+    });
+
+    const wrapper = mount(Login, {
+      store,
+      computed,
+      localVue
+    });
+
+    const passwordInput = wrapper.get('#password');
+    await passwordInput.setValue('1');
 
     expect(actions[ActionTypes.SET_ERROR]).toHaveBeenCalled();
 

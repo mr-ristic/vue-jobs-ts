@@ -25,13 +25,14 @@
             type="password"
             id="password"
             name="password"
-            class="form-control mt-3 is-invalid"
+            class="form-control"
             placeholder="Password"
             autocomplete="on"
             v-model="password"
+            :class="errors.password && 'is-invalid'"
           />
-          <small class="text-danger">
-            Error placeholder
+          <small v-if="errors.password" class="text-danger">
+            {{ errors.password }}
           </small>
         </div>
         <button class="btn btn-lg btn-primary btn-block mt-3" type="submit">
@@ -66,6 +67,9 @@ export default Vue.extend({
   watch: {
     email(value: string): void {
       this.validateEmail(value);
+    },
+    password(value: string): void {
+      this.validatePassword(value);
     }
   },
   methods: {
@@ -76,13 +80,19 @@ export default Vue.extend({
     validateEmail(email: string): void {
       const emailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i;
       if (!emailRegex.test(email)) {
-        // TODO call error action
-        // console.log(this);
         this[ActionTypes.SET_ERROR]('email');
       }
       if (emailRegex.test(email)) {
         // console.log(this.errors);
         // TODO call clear error action
+      }
+    },
+    validatePassword(password: string) {
+      if (password.length < 6) {
+        this[ActionTypes.SET_ERROR]('password');
+      }
+      if (password.length > 5) {
+        // TODO clear error
       }
     }
   }

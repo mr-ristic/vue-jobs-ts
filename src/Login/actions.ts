@@ -7,5 +7,8 @@ export const actions: ActionTree<LoginProps, StateProps> = {
     if (payload === 'email') {
       commit(MutationTypes.SET_EMAIL_ERROR);
     }
+    if (payload === 'password') {
+      commit(MutationTypes.SET_PASSWORD_ERROR);
+    }
   }
 };
