@@ -4,7 +4,7 @@
     <table v-if="!loader && data" class="table">
       <thead v-if="pagination" class="thead-dark">
         <tr>
-          <th colspan="5">
+          <th colspan="4">
             <nav>
               <Paginate
                 v-model="pagination.currentPage"
@@ -23,6 +23,22 @@
                 :pageClass="'page-item'"
               >
               </Paginate>
+            </nav>
+          </th>
+          <th colspan="1" class="text-center">
+            <nav>
+              <label for="per-page">Per Page:</label>
+              <ul id="per-page" class="pagination">
+                <li
+                  @click="perPageClickHandler(num)"
+                  v-for="num in pageNumbers"
+                  :key="num"
+                  class="page-item"
+                  :class="num === pagination.perPage && 'active'"
+                >
+                  <a class="page-link" href="#">{{ num }}</a>
+                </li>
+              </ul>
             </nav>
           </th>
         </tr>
@@ -55,6 +71,11 @@ import { ActionTypes } from './const';
 export default {
   name: 'Jobs',
   components: { Paginate },
+  data() {
+    return {
+      pageNumbers: [10, 20, 40, 80, 100, 200]
+    };
+  },
   computed: {
     ...mapState({
       loader: (state) => state.jobs.loader
@@ -64,9 +85,19 @@ export default {
   methods: {
     ...mapActions([ActionTypes.FETCH_DATA_ACTION]),
     pageClickHandler(pageNumber) {
-      this[ActionTypes.FETCH_DATA_ACTION]({ pageNumber });
+      this[ActionTypes.FETCH_DATA_ACTION]({
+        pageNumber,
+        perPage: this.pagination.perPage
+      });
+    },
+    perPageClickHandler(perPage) {
+      this[ActionTypes.FETCH_DATA_ACTION]({
+        pageNumber: 1,
+        perPage
+      });
     }
   },
+
   mounted() {
     this[ActionTypes.FETCH_DATA_ACTION]();
   }

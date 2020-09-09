@@ -13,7 +13,8 @@ export const actions: ActionTree<JobsProps, RootStateProps> = {
       params: {
         order_by: 'start_time',
         include: 'client.jobRequest,jobRequest.jobType,user',
-        page: paylload ? paylload.pageNumber : 1
+        page: paylload ? paylload.pageNumber : 1,
+        per_page: paylload ? paylload.perPage : 20
       }
     }).then(({ data, meta }) => {
       commit(MutationTypes.FETCH_DATA_SUCCESS, data);
