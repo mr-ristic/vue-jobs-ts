@@ -3,6 +3,7 @@ import { ActionTypes, MutationTypes } from './const';
 import { LoginProps, StateProps, FieldsProps } from './interface';
 import { API_URL } from '../const';
 import { postData } from '../network';
+import router from '@/router';
 
 export const actions: ActionTree<LoginProps, StateProps> = {
   [ActionTypes.SET_ERROR]({ commit }, payload: string) {
@@ -21,7 +22,9 @@ export const actions: ActionTree<LoginProps, StateProps> = {
     commit(MutationTypes.RESET_ERROR, false);
     postData(`${API_URL}auth/login`, payload)
       .then((data) => {
-        console.log({ data });
+        commit(MutationTypes.LOGIN_SUCCESS, data.token);
+        localStorage.setItem('token', data.token);
+        router.push('/jobs');
       })
       .catch(({ response }) => {
         commit(MutationTypes.SET_SUBMITTING, false);

@@ -1,5 +1,6 @@
 import { Module, ActionTree } from 'vuex';
-import { LoginProps, StateProps } from './interface';
+import { LoginProps } from './interface';
+import { RootStateProps } from '../store/interface';
 import { actions } from './actions';
 import { mutations } from './mutations';
 import { getters } from './getters';
@@ -13,7 +14,7 @@ export const initialLoginState = {
   submitting: false
 };
 
-const LoginModule: Module<LoginProps, StateProps> = {
+const LoginModule: Module<LoginProps, RootStateProps> = {
   state: () => ({ ...initialLoginState }),
   actions,
   mutations,

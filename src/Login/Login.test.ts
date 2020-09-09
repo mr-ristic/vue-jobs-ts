@@ -25,7 +25,7 @@ describe('Login.vue tests', () => {
   const store = new Vuex.Store({
     state: initialLoginState,
     actions,
-    getters
+    getters: { ...getters, isLoggedIn: () => false }
   });
 
   it('should render Login component', () => {

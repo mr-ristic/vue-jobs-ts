@@ -1,27 +1,31 @@
-import Vue from "vue";
-import VueRouter, { RouteConfig } from "vue-router";
-import Login from "../Login";
-import Jobs from "../Jobs";
+import Vue from 'vue';
+import VueRouter, { RouteConfig } from 'vue-router';
+import Login from '../Login';
+import Jobs from '../Jobs';
+import store from '../store';
 
 Vue.use(VueRouter);
 
 const routes: Array<RouteConfig> = [
   {
-    path: "/login",
-    name: "Login",
-    component: Login,
+    path: '/login',
+    name: 'Login',
+    component: Login
   },
   {
-    path: "/jobs",
-    name: "Jobs",
+    path: '/jobs',
+    name: 'Jobs',
     component: Jobs,
-  },
+    meta: {
+      requiresAuth: true
+    }
+  }
 ];
 
 const router = new VueRouter({
-  mode: "history",
+  mode: 'history',
   base: process.env.BASE_URL,
-  routes,
+  routes
 });
 
 export default router;
