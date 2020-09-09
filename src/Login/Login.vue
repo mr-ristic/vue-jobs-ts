@@ -56,13 +56,9 @@ import Vue from 'vue';
 import { mapState, mapActions, mapGetters } from 'vuex';
 import { ErrorProps } from './interface';
 import { ActionTypes, GetterTypes } from './const';
-import router from '@/router';
 
 export default Vue.extend({
   name: 'Login',
-  beforeMount() {
-    if (this.isLoggedIn) router.push('/jobs');
-  },
   data() {
     return {
       email: '',
