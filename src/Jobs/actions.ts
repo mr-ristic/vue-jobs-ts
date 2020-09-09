@@ -15,7 +15,6 @@ export const actions: ActionTree<JobsProps, RootStateProps> = {
         include: 'client.jobRequest,jobRequest.jobType,user'
       }
     }).then(({ data }) => {
-      console.log({ data });
       commit(MutationTypes.FETCH_DATA_SUCCESS, data);
       commit(MutationTypes.SET_LOADER, false);
     });

@@ -1,6 +1,26 @@
 <template>
   <div>
     <div v-if="loader" class="loader"><img src="@/assets/loader.gif" /></div>
+    <table v-if="!loader && getData" class="table">
+      <thead class="thead-dark">
+        <tr>
+          <th scope="col">User name</th>
+          <th scope="col">Job Name</th>
+          <th scope="col">Client name</th>
+          <th scope="col">Start time</th>
+          <th scope="col">End time</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr v-for="item in getData" :key="item.startTime">
+          <td>{{ item.userName }}</td>
+          <td>{{ item.jobName }}</td>
+          <td>{{ item.clientName }}</td>
+          <td>{{ item.startTime }}</td>
+          <td>{{ item.endTime }}</td>
+        </tr>
+      </tbody>
+    </table>
   </div>
 </template>
 
