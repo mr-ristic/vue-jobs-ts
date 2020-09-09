@@ -1,19 +1,20 @@
 import { mutations } from './mutations';
 import { MutationTypes, EMAIL_ERROR, PASSWORD_ERROR } from './const';
 import { initialLoginState } from './module';
+import { ErrorTypes } from '@/errors/const';
 
 describe('Login mutations test', () => {
   const state = initialLoginState;
   it('should set email error', () => {
-    mutations[MutationTypes.SET_EMAIL_ERROR](state);
+    mutations[ErrorTypes.SET_EMAIL_ERROR](state);
     expect(state.errors.email).toEqual(EMAIL_ERROR);
   });
   it('should set password error', () => {
-    mutations[MutationTypes.SET_PASSWORD_ERROR](state);
+    mutations[ErrorTypes.SET_PASSWORD_ERROR](state);
     expect(state.errors.password).toEqual(PASSWORD_ERROR);
   });
   it('should set other(server) error', () => {
-    mutations[MutationTypes.SET_OTHER_ERROR](state, 'Error from the server');
+    mutations[ErrorTypes.SET_SERVER_ERROR](state, 'Error from the server');
     expect(state.errors.message).toEqual('Error from the server');
   });
   it('should delete email error', () => {

@@ -9,7 +9,8 @@ const computed = {
   loader: () => false,
   data: () => false,
   getData: () => false,
-  pagination: () => false
+  pagination: () => false,
+  error: () => false
 };
 
 describe('Jobs.vue tests', () => {

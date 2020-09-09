@@ -1,5 +1,8 @@
 <template>
   <div>
+    <div v-if="error" class="row alert alert-danger" role="alert">
+      {{ error }}
+    </div>
     <div v-if="loader" class="loader"><img src="@/assets/loader.gif" /></div>
     <table v-if="!loader && data" class="table">
       <thead v-if="pagination" class="thead-dark">
@@ -78,7 +81,8 @@ export default {
   },
   computed: {
     ...mapState({
-      loader: (state) => state.jobs.loader
+      loader: (state) => state.jobs.loader,
+      error: (state) => state.login.errors.message
     }),
     ...mapGetters({ data: 'getData', pagination: 'getPagination' })
   },

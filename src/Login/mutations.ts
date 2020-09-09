@@ -1,15 +1,16 @@
 import { MutationTree } from 'vuex';
 import { LoginProps } from './interface';
 import { MutationTypes, EMAIL_ERROR, PASSWORD_ERROR } from './const';
+import { ErrorTypes } from '@/errors/const';
 
 export const mutations: MutationTree<LoginProps> = {
-  [MutationTypes.SET_EMAIL_ERROR](state) {
+  [ErrorTypes.SET_EMAIL_ERROR](state) {
     state.errors.email = EMAIL_ERROR;
   },
-  [MutationTypes.SET_PASSWORD_ERROR](state) {
+  [ErrorTypes.SET_PASSWORD_ERROR](state) {
     state.errors.password = PASSWORD_ERROR;
   },
-  [MutationTypes.SET_OTHER_ERROR](state, payload) {
+  [ErrorTypes.SET_SERVER_ERROR](state, payload) {
     state.errors.message = payload;
   },
   [MutationTypes.RESET_ERROR](state, payload: string) {

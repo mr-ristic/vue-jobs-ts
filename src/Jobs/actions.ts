@@ -4,6 +4,8 @@ import { JobsProps } from './interface';
 import { API_URL } from '../const';
 import { fetchData } from '../network';
 import { RootStateProps } from '@/store/interface';
+import errorHandle from '@/errors';
+import { ErrorTypes } from '@/errors/const';
 
 export const actions: ActionTree<JobsProps, RootStateProps> = {
   [ActionTypes.FETCH_DATA_ACTION]({ commit, rootState }, paylload?: any) {
@@ -16,10 +18,15 @@ export const actions: ActionTree<JobsProps, RootStateProps> = {
         page: paylload ? paylload.pageNumber : 1,
         per_page: paylload ? paylload.perPage : 20
       }
-    }).then(({ data, meta }) => {
-      commit(MutationTypes.FETCH_DATA_SUCCESS, data);
-      commit(MutationTypes.SET_PAGINATION_DATA, meta);
-      commit(MutationTypes.SET_LOADER, false);
-    });
+    })
+      .then(({ data, meta }) => {
+        commit(MutationTypes.FETCH_DATA_SUCCESS, data);
+        commit(MutationTypes.SET_PAGINATION_DATA, meta);
+        commit(MutationTypes.SET_LOADER, false);
+      })
+      .catch(({ response }) => {
+        commit(MutationTypes.SET_LOADER, false);
+        errorHandle(response.data, ErrorTypes.SET_SERVER_ERROR, commit);
+      });
   }
 };
