@@ -2,7 +2,7 @@ import { MutationTree } from 'vuex';
 import { MutationTypes } from './const';
 import { JobsProps } from './interface';
 
-export const mutations: MutationTree<JobsProps> = {
+export const mutations: MutationTree<any> = {
   [MutationTypes.SET_LOADER](state, payload: boolean) {
     state.loader = payload;
   },

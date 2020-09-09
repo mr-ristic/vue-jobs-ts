@@ -5,6 +5,10 @@ import Jobs from '.';
 
 const localVue = createLocalVue();
 localVue.use(Vuex);
+const computed = {
+  loader: () => false,
+  data: () => false
+};
 
 describe('Jobs.vue tests', () => {
   let actions;
@@ -20,13 +24,13 @@ describe('Jobs.vue tests', () => {
     });
   });
   it('should render Jobs component', () => {
-    const wrapper = shallowMount(Jobs, { store, localVue });
+    const wrapper = shallowMount(Jobs, { store, computed, localVue });
     expect(wrapper).toBeTruthy();
     wrapper.destroy();
   });
 
   it('should call fetch data action', () => {
-    const wrapper = shallowMount(Jobs, { store, localVue });
+    const wrapper = shallowMount(Jobs, { store, computed, localVue });
     expect(actions[ActionTypes.FETCH_DATA_ACTION]).toHaveBeenCalledTimes(1);
     wrapper.destroy();
   });
