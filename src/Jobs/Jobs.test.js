@@ -7,7 +7,9 @@ const localVue = createLocalVue();
 localVue.use(Vuex);
 const computed = {
   loader: () => false,
-  data: () => false
+  data: () => false,
+  getData: () => false,
+  pagination: () => false
 };
 
 describe('Jobs.vue tests', () => {

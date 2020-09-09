@@ -7,7 +7,8 @@ import { getters } from './getters';
 
 export const initialState = {
   loader: false,
-  data: []
+  data: [],
+  pagination: false
 };
 
 const JobsModule: Module<any, RootStateProps> = {
