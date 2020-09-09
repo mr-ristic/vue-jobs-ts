@@ -1,6 +1,6 @@
 <template>
   <div>
-    Jobs
+    <div class="loader"><img src="@/assets/loader.gif" /></div>
   </div>
 </template>
 

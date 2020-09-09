@@ -3,7 +3,10 @@ import { JobsProps } from './interface';
 import { RootStateProps } from '../store/interface';
 import { actions } from './actions';
 
-export const initialState = {};
+export const initialState = {
+  loader: false,
+  data: []
+};
 
 const JobsModule: Module<JobsProps, RootStateProps> = {
   state: () => ({ ...initialState }),
