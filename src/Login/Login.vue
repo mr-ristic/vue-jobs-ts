@@ -104,7 +104,8 @@ export default Vue.extend({
     onSubmit(): void {
       this[ActionTypes.SUBMIT_FORM]({
         email: this.email,
-        password: this.password
+        password: this.password,
+        router: this.$router
       });
     },
     ...mapActions([

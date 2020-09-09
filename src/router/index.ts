@@ -45,7 +45,6 @@ export function createRouter(vueInstance = Vue, store: Store<any>) {
   });
 
   router.beforeEach((to, from, next) => {
-    console.log({ to });
     if (to.name === 'Login' && store.getters.isLoggedIn) {
       next(from.path);
     }

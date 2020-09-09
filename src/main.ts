@@ -7,8 +7,6 @@ import store from './store';
 Vue.config.productionTip = false;
 let router = createRouter(Vue, store);
 
-console.log({ router });
-
 new Vue({
   router,
   store,

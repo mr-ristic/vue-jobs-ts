@@ -3,7 +3,6 @@ import { ActionTypes, MutationTypes } from './const';
 import { LoginProps, StateProps, FieldsProps } from './interface';
 import { API_URL } from '../const';
 import { postData } from '../network';
-import router from '@/router';
 
 export const actions: ActionTree<LoginProps, StateProps> = {
   [ActionTypes.SET_ERROR]({ commit }, payload: string) {
@@ -17,14 +16,17 @@ export const actions: ActionTree<LoginProps, StateProps> = {
   [ActionTypes.RESET_ERROR]({ commit }, payload: string | boolean) {
     commit(MutationTypes.RESET_ERROR, payload);
   },
-  [ActionTypes.SUBMIT_FORM]({ commit }, payload: FieldsProps) {
+  [ActionTypes.SUBMIT_FORM]({ commit, rootState }, payload: FieldsProps) {
     commit(MutationTypes.SET_SUBMITTING, true);
     commit(MutationTypes.RESET_ERROR, false);
-    postData(`${API_URL}auth/login`, payload)
+    postData(`${API_URL}auth/login`, {
+      email: payload.email,
+      password: payload.password
+    })
       .then((data) => {
         commit(MutationTypes.LOGIN_SUCCESS, data.token);
         localStorage.setItem('token', data.token);
-        router.push('/jobs');
+        payload.router.push('/jobs');
       })
       .catch(({ response }) => {
         commit(MutationTypes.SET_SUBMITTING, false);

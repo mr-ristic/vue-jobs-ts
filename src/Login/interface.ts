@@ -12,6 +12,7 @@ export interface LoginProps {
 export interface FieldsProps {
   email: string;
   password: string;
+  router: any;
 }
 
 export interface StateProps {}
