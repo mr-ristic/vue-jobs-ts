@@ -7,6 +7,7 @@ import { initialLoginState } from './module';
 
 const localVue = createLocalVue();
 localVue.use(Vuex);
+
 const computed = {
   errors: () => ({
     email: false,
@@ -16,16 +17,20 @@ const computed = {
 };
 
 describe('Login.vue tests', () => {
-  const actions = {
-    [ActionTypes.SET_ERROR]: jest.fn(),
-    [ActionTypes.RESET_ERROR]: jest.fn(),
-    [ActionTypes.SUBMIT_FORM]: jest.fn()
-  };
+  let actions;
+  let store;
 
-  const store = new Vuex.Store({
-    state: initialLoginState,
-    actions,
-    getters: { ...getters, isLoggedIn: () => false }
+  beforeEach(() => {
+    actions = {
+      [ActionTypes.SET_ERROR]: jest.fn(),
+      [ActionTypes.RESET_ERROR]: jest.fn(),
+      [ActionTypes.SUBMIT_FORM]: jest.fn()
+    };
+    store = new Vuex.Store({
+      state: initialLoginState,
+      actions,
+      getters: { ...getters, isLoggedIn: () => false }
+    });
   });
 
   it('should render Login component', () => {

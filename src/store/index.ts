@@ -4,6 +4,7 @@ import LoginModule from '../Login/module';
 import { mutations } from './mutations';
 import { getters } from './getters';
 import { MutationTypes as AuthMutations } from '@/Login/const';
+import JobsModule from '../Jobs/module';
 
 Vue.use(Vuex);
 
@@ -21,6 +22,7 @@ export default new Vuex.Store({
     }
   },
   modules: {
-    login: LoginModule
+    login: LoginModule,
+    jobs: JobsModule
   }
 });

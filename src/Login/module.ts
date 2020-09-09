@@ -1,4 +1,4 @@
-import { Module, ActionTree } from 'vuex';
+import { Module } from 'vuex';
 import { LoginProps } from './interface';
 import { RootStateProps } from '../store/interface';
 import { actions } from './actions';
