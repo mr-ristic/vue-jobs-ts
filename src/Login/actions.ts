@@ -24,6 +24,7 @@ export const actions: ActionTree<LoginProps, StateProps> = {
       password: payload.password
     })
       .then((data) => {
+        commit(MutationTypes.SET_SUBMITTING, false);
         commit(MutationTypes.LOGIN_SUCCESS, data.token);
         localStorage.setItem('token', data.token);
         payload.router.push('/jobs');
