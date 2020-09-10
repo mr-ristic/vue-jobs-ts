@@ -10,7 +10,7 @@
   </div>
 </template>
 
-<script lang="ts">
+<script>
 import { mapGetters, mapActions } from 'vuex';
 
 export default {
